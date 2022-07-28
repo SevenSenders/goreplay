@@ -8,5 +8,5 @@ RUN tar xzf gor.tar.gz
 
 FROM scratch
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=builder /gor .
-ENTRYPOINT ["./gor --input-raw :8081 --output-kafka-host 'kafka-headless.kafka-dev.svc.cluster.local:9092' --output-kafka-topic 'core.requests.publicapi'"]
+COPY --from=builder /gor /
+ENTRYPOINT ["/gor", "--input-raw", ":8081", "--output-kafka-host", "kafka-headless.kafka-dev.svc.cluster.local:9092", "--output-kafka-topic", "core.requests.publicapi"]
